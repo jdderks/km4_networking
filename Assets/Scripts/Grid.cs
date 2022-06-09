@@ -99,8 +99,6 @@ public class Grid : MonoBehaviour
                         {
                             selectedTileObject = hitInfo.collider.gameObject;
                             SelectedTile = selectedTileObject.GetComponent<Tile>();
-                            Debug.Log(selectedTile.x + " " + selectedTile.z);
-
                         }
                     }
                 }

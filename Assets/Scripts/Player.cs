@@ -4,49 +4,45 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private int number = (int)default;
+    //The number this player is assigned
+    private int assignedNumber = (int)default;
+
+    //Movement Related
+    private float moveSpeed = 8.0f;
     private Vector2 desiredPosition = (Vector2)default;
-    private float moveSpeed = 2.0f;
     private Vector2Int currentPosition = (Vector2Int)default;
 
+    //Whether or not the player is currently moving
     [SerializeField] bool isMoving;
 
+    [SerializeField] int movesLeft = 5;
+
     public Vector2Int CurrentPosition { get => currentPosition; set => currentPosition = value; }
-    public int Number { get => number; set => number = value; }
+    public int AssignedNumber { get => assignedNumber; set => assignedNumber = value; }
     public bool IsMoving { get => isMoving; }
-
-    private Grid tileGrid;
-
-
-
-    private void Awake()
-    {
-        
-    }
+    public int MovesLeft { get => movesLeft; set => movesLeft = value; }
 
     public void MoveTo(Tile tile)
     {
-        desiredPosition = new Vector2(tile.x,tile.z);
-        CurrentPosition = new Vector2Int(tile.x,tile.z);
+        if (tile != null)
+        {
+            desiredPosition = new Vector2(tile.x, tile.z);
+            currentPosition = new Vector2Int(tile.x, tile.z); 
+            transform.position = new Vector3(desiredPosition.x, 0 ,desiredPosition.y);
+
+        }
     }
 
     public void MoveTo(Vector2Int position)
     {
         desiredPosition = position;
-        CurrentPosition = position;
+        currentPosition = position;
+        transform.position = new Vector3(desiredPosition.x, 0, desiredPosition.y);
+
     }
 
     private void Update()
     {
-        float step = moveSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(desiredPosition.x,0,desiredPosition.y), step);
-        if (Vector3.Distance(transform.position, desiredPosition) > 0.1f)
-        {
-            isMoving = true;
-        } 
-        else
-        {
-            isMoving = false;
-        }
+        
     }
 }
