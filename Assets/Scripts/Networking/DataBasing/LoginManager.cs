@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class LoginManager : MonoBehaviour
     private string _username = "naamVanuitUnity";
     private string _mailadress = "mailVanuitUnity";
     private string _password = "passwordVanuitUnity";
+    private string _birthdate = "01-01-01";
 
     void Start()
     {
@@ -20,7 +22,6 @@ public class LoginManager : MonoBehaviour
         StartCoroutine(RegisterUserEnumerator());
     }
 
-    
 
     //Returns "Hello world" from the server for debugging
     private IEnumerator GetText()
