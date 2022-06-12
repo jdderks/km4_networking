@@ -12,6 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd27a74b8dff4a24eaeea4d9b5e42fe0, type: 3}
   m_Name: CurrentlyLoggedInUser
   m_EditorClassIdentifier: 
-  id: 0
-  username: 
-  emailAdress: 
+  isCurrentlyLoggedIn: 0
+  id: 32
+  username: Joris
+  emailAdress: joris@derks.com
+  regdate: 1654954685
+  regDay: 11
+  regMonth: 6
+  regYear: 2022
+  birthDate: 907286400
+  birthDay: 2
+  birthMonth: 10
+  birthYear: 1998
+  stayLoggedIn: 0
