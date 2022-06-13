@@ -27,8 +27,9 @@ public class RegistrationManager : MonoBehaviour
                 usernameText.text,
                 mailadressText.text,
                 passwordText.text,
-                GetDateFromNumbers(int.Parse(birthYearText.text), int.Parse(birthMonthText.text), int.Parse(birthDayText.text)))
+                MakeValidDateFromStrings(birthYearText.text, birthMonthText.text, birthDayText.text))
                 );
+
         }
     }
 
@@ -56,9 +57,19 @@ public class RegistrationManager : MonoBehaviour
         yield return null;
     }
 
-    private string GetDateFromNumbers(int yyyy, int mm, int dd)
+    private string MakeValidDateFromStrings(string yyyy, string mm, string dd)
     {
-        return yyyy.ToString() + "-" + mm.ToString() + "-" + dd.ToString();
+        if (mm.Length < 2 && mm.Length > 0)
+        {
+            mm = "0" + mm;
+        }
+        if (dd.Length < 2 && dd.Length > 0)
+        {
+            dd = "0" + dd;
+        }
+        string stringDate = yyyy + "-" + mm + "-" + dd;
+        Debug.Log(stringDate);
+        return stringDate;
     }
 
     //Returns "Hello world" from the server for debugging

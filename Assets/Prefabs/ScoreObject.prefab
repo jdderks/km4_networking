@@ -350,7 +350,7 @@ MonoBehaviour:
   numberText: {fileID: 3824920273068255950}
   nameText: {fileID: 3824920273514279677}
   scoreText: {fileID: 3824920274358634767}
-  DateText: {fileID: 3824920273106571837}
+  dateText: {fileID: 3824920273106571837}
 --- !u!1 &3824920273514279675
 GameObject:
   m_ObjectHideFlags: 0

@@ -59,6 +59,11 @@ public class Scoreboard : MonoBehaviour
                     high.name = jsonArray[i];
                     high.score = int.Parse(jsonArray[i+1]);
                     high.date = long.Parse(jsonArray[i+2]);
+                    Scores scores = scoreObjects[i].GetComponent<Scores>();
+                    scores.NameText.text = high.name;
+                    scores.ScoreText.text = high.score.ToString();
+                    Debug.Log(high.date);
+                    scores.DateText.text = high.date.ToString();
                 }
             }
         }
