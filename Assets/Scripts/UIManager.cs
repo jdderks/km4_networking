@@ -20,7 +20,21 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UIPanels selectedPanel;
     [SerializeField] private List<GameObject> panelObjects = default;
 
-    [SerializeField] private TMP_InputField addressInput;
+
+    public void ChangeMenu(int menuNumber)
+    {
+        for (int i = 0; i < panelObjects.Count; i++)
+        {
+            if (i == menuNumber)
+            {
+                panelObjects[i].SetActive(true);
+            }
+            else
+            {
+                panelObjects[i].SetActive(false);
+            }
+        }
+    }
 
 
 
