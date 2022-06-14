@@ -3,7 +3,6 @@ using Unity.Networking.Transport;
 //For this class I've followed a tutorial from "Epitome" on YouTube
 //Link: https://www.youtube.com/watch?v=lPoiTw0qjtc&list=PLmcbjnHce7SeAUFouc3X9zqXxiPbCz8Zp&index=11
 
-
 public class NetKeepAlive : NetMessage
 {
     public NetKeepAlive() // <-- Making the box

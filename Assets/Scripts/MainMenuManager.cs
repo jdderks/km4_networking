@@ -11,7 +11,7 @@ public enum UIPanels
     HostGame = 3
 }
 
-public class UIManager : MonoBehaviour
+public class MainMenuManager : MonoBehaviour
 {
 
     //[SerializeField] private Server server;

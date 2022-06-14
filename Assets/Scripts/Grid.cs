@@ -7,11 +7,11 @@ public class Grid : MonoBehaviour
     [SerializeField] private int gridX = 25;
     [SerializeField] private int gridZ = 25;
 
-    
+
 
     private Player player = null;
     private GameObject playerGO = null;
-    
+
     [SerializeField] private Vector2Int currentPlayerPosition;
 
     [SerializeField] private Transform tileParent;
@@ -36,7 +36,7 @@ public class Grid : MonoBehaviour
         for (int x = 0; x < gridX; x++)
         {
             for (int z = 0; z < gridZ; z++)
-            { 
+            {
                 var rotation = Quaternion.Euler(90, 0, 0);
 
                 //Create a new tile from a quad
@@ -70,46 +70,49 @@ public class Grid : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo))
+        if (camera != null)
         {
-            if (hitInfo.collider.gameObject != hoveredTileObject && hoveredTileObject != null || hitInfo.collider == null)
+            Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hitInfo))
             {
-                var r = hoveredTileObject.GetComponent<Renderer>();
-                r.material.color = new Color32(0, (byte)hoveredTileObject.GetComponent<Tile>().greenery, 0, 255);
-                hoveredTileObject = null;
-            }
-
-            if (hitInfo.collider.gameObject.GetComponent<Tile>() != null)
-            {
-                var hoverTile = hitInfo.collider.gameObject.GetComponent<Tile>();
-
-                //Check if tile is neighboring the player occupied tile
-                if (hoverTile.x >= CurrentPlayerPosition.x - 1 && hoverTile.x <= CurrentPlayerPosition.x + 1 &&
-                    hoverTile.z >= CurrentPlayerPosition.y - 1 && hoverTile.z <= CurrentPlayerPosition.y + 1)
+                if (hitInfo.collider.gameObject != hoveredTileObject && hoveredTileObject != null || hitInfo.collider == null)
                 {
-                    if (hoverTile != GetTileFromPosition(CurrentPlayerPosition.x, CurrentPlayerPosition.y))
+                    var r = hoveredTileObject.GetComponent<Renderer>();
+                    r.material.color = new Color32(0, (byte)hoveredTileObject.GetComponent<Tile>().greenery, 0, 255);
+                    hoveredTileObject = null;
+                }
+
+                if (hitInfo.collider.gameObject.GetComponent<Tile>() != null)
+                {
+                    var hoverTile = hitInfo.collider.gameObject.GetComponent<Tile>();
+
+                    //Check if tile is neighboring the player occupied tile
+                    if (hoverTile.x >= CurrentPlayerPosition.x - 1 && hoverTile.x <= CurrentPlayerPosition.x + 1 &&
+                        hoverTile.z >= CurrentPlayerPosition.y - 1 && hoverTile.z <= CurrentPlayerPosition.y + 1)
+                    {
+                        if (hoverTile != GetTileFromPosition(CurrentPlayerPosition.x, CurrentPlayerPosition.y))
+                        {
+                            hoveredTileObject = hitInfo.collider.gameObject;
+                            var renderer = hoveredTileObject.GetComponent<Renderer>();
+                            var starColor = renderer.material.color;
+                            renderer.material.color = Color.yellow;
+
+                            if (Input.GetMouseButtonDown(0))
+                            {
+                                selectedTileObject = hitInfo.collider.gameObject;
+                                SelectedTile = selectedTileObject.GetComponent<Tile>();
+                            }
+                        }
+                    }
+                    else
                     {
                         hoveredTileObject = hitInfo.collider.gameObject;
                         var renderer = hoveredTileObject.GetComponent<Renderer>();
                         var starColor = renderer.material.color;
-                        renderer.material.color = Color.yellow;
-                        
-                        if (Input.GetMouseButtonDown(0))
-                        {
-                            selectedTileObject = hitInfo.collider.gameObject;
-                            SelectedTile = selectedTileObject.GetComponent<Tile>();
-                        }
+                        renderer.material.color = Color.gray;
                     }
+
                 }
-                else
-                {
-                    hoveredTileObject = hitInfo.collider.gameObject;
-                    var renderer = hoveredTileObject.GetComponent<Renderer>();
-                    var starColor = renderer.material.color;
-                    renderer.material.color = Color.gray;
-                }
-               
             }
         }
         else

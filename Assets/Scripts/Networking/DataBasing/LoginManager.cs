@@ -17,6 +17,11 @@ public class LoginManager : MonoBehaviour
     [SerializeField] private UserScriptableObject currentLoggedInUserObject;
     [Space]
     [SerializeField] private Toggle staySignedInToggle;
+    [Space]
+    [SerializeField] private TextMeshProUGUI currentLoggedInText;
+
+    [SerializeField] private Button joinGameButton;
+    [SerializeField] private Button hostGameButton;
 
 
     [ContextMenu("Login User")]
@@ -70,6 +75,11 @@ public class LoginManager : MonoBehaviour
 
                 currentLoggedInUserObject.stayLoggedIn = staySignedInToggle.isOn;
                 currentLoggedInUserObject.isCurrentlyLoggedIn = true;
+
+                currentLoggedInText.text = currentLoggedInUserObject.username.ToString();
+
+                hostGameButton.interactable = true;
+                joinGameButton.interactable = true;
             } 
             else
             {
@@ -99,6 +109,13 @@ public class LoginManager : MonoBehaviour
         currentLoggedInUserObject.stayLoggedIn = false;
         staySignedInToggle.isOn = false;
         currentLoggedInUserObject.isCurrentlyLoggedIn = false;
+
+        currentLoggedInText.text = "";
+
+        hostGameButton.interactable = false;
+        joinGameButton.interactable = false;
+
+
     }
 }
 

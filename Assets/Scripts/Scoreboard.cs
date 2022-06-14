@@ -44,9 +44,9 @@ public class Scoreboard : MonoBehaviour
             {
                 scores.Clear();
                 string json = www.downloadHandler.text;
-                Debug.Log(www.downloadHandler.text);
+                //Debug.Log(www.downloadHandler.text);
 
-                string[] jsonArray = json.Split(new string[] { "[", "]", "{", "}", ":", ",", "name", "score", "time", '"'.ToString() }, StringSplitOptions.RemoveEmptyEntries);
+                string[] jsonArray = json.Split(new string[] { "[", "]", "{", "}", ":", ",", "name", "score", "time", "\"" }, StringSplitOptions.RemoveEmptyEntries);
                 List<string> jsonList = jsonArray.ToList();
                 for (int i = 0; i < jsonArray.Length; i += 3)
                 {
@@ -95,9 +95,10 @@ public class Scoreboard : MonoBehaviour
             {
                 scores.Clear();
                 string json = www.downloadHandler.text;
-                Debug.Log(www.downloadHandler.text);
+                //Debug.Log(www.downloadHandler.text);
 
-                string[] jsonArray = json.Split(new string[] { "[", "]", "{", "}", ":", ",", "name", "score", "time", '"'.ToString() }, StringSplitOptions.RemoveEmptyEntries);
+                //TODO: use newtownsoft unity version download
+                string[] jsonArray = json.Split(new string[] { "[", "]", "{", "}", ":", ",", "name", "score", "time", "\"" }, StringSplitOptions.RemoveEmptyEntries);
                 List<string> jsonList = jsonArray.ToList();
                 for (int i = 0; i < jsonArray.Length; i += 3)
                 {

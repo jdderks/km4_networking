@@ -4,19 +4,21 @@ using UnityEngine;
 
 public enum GameState
 {
-    IS_SETUP,
-    IS_PLAYING,
-    IS_PAUSED,
-    IS_GAMEOVER
+    IS_MAIN_MENU = 0,
+    IS_PLAYING = 1,
+    IS_PAUSED = 2,
+    IS_GAMEOVER = 3
 }
 
 
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] private GameState currentGameState = GameState.IS_SETUP;
+    [SerializeField] private GameState currentGameState = GameState.IS_MAIN_MENU;
     private List<Player> players = new List<Player>();
-    private UIManager uiManager;
+    private MainMenuManager uiManager;
+
+    [SerializeField] private List<GameObject> UIStateObjects = new List<GameObject>();
 
     [SerializeField] private Grid tileGrid;
 
@@ -24,8 +26,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject playerPrefab;
 
-    void Start()
+    public void StartGame()
     {
+        SetActiveUIStateObjects(1);
+
         CreateGrid();
         CreatePlayer(new Vector2Int(5, 5), 5);
         AssignCamera();
@@ -72,6 +76,24 @@ public class GameManager : MonoBehaviour
         tileGrid.Generate();
     }
 
+    private void SetActiveUIStateObjects(int activeNmbr)
+    {
+        for (int i = 0; i < UIStateObjects.Count; i++)
+        {
+            if (i == activeNmbr)
+            {
+                UIStateObjects[i].SetActive(true);
+            }
+            else
+            {
+                UIStateObjects[i].SetActive(false);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Assigns the acrive camera to the player
+    /// </summary>
     private void AssignCamera()
     {
         tileGrid.Camera = players[playerTurn].GetComponentInChildren<Camera>();
